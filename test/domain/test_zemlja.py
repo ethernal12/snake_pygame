@@ -1,0 +1,26 @@
+import unittest
+
+from src.domain.hrana import Hrana
+from src.domain.snake import Snake
+from src.domain.zemlja import Zemlja
+
+
+class Test_Zemlja(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.sirina = 5
+        self.visina = 3
+        self.zemlja = Zemlja(self.sirina, self.visina, )
+
+    def test___init__(self):
+        for i in range(100):
+            self.zemlja = Zemlja(self.sirina, self.visina)
+
+            self.assertEqual(self.zemlja.visina, self.visina)
+            self.assertEqual(self.zemlja.sirina, self.sirina)
+            self.assertTrue(isinstance(self.zemlja.snake, Snake))
+            self.assertTrue(isinstance(self.zemlja.hrana, Hrana))
+            self.assertTrue(0 <= self.zemlja.snake.x <= self.sirina)
+            self.assertTrue(0 <= self.zemlja.snake.y <= self.visina)
+            self.assertTrue(0 <= self.zemlja.hrana.x <= self.sirina)
+            self.assertTrue(0 <= self.zemlja.hrana.y <= self.visina)
