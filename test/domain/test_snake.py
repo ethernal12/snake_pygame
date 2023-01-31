@@ -21,7 +21,7 @@ class Test_Snake(unittest.TestCase):
         self.assertEqual(self.snake.y, self.snake_y)
         self.assertEqual(self.snake.velikost, self.snake_velikost)
 
-    def test_premik(self):
+    def test_postavitev(self):
         for i in range(5):
             # pozitivna sprememba
             self.snake = self.init_snake(x=self.snake_x, y=self.snake_y)
@@ -41,3 +41,4 @@ class Test_Snake(unittest.TestCase):
             y_nova = self.snake.y
             self.assertTrue(x > x_nova)
             self.assertTrue(y > y_nova)
+    def test_premik(self):
