@@ -8,8 +8,8 @@ from src.domain.zemlja import Zemlja
 class Test_Zemlja(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.sirina = 5
-        self.visina = 3
+        self.sirina = 10
+        self.visina = 10
         self.zemlja = Zemlja(self.sirina, self.visina, )
 
     def test___init__(self):
@@ -24,3 +24,5 @@ class Test_Zemlja(unittest.TestCase):
             self.assertTrue(0 <= self.zemlja.snake.y <= self.visina)
             self.assertTrue(0 <= self.zemlja.hrana.x <= self.sirina)
             self.assertTrue(0 <= self.zemlja.hrana.y <= self.visina)
+
+

@@ -1,6 +1,6 @@
 import logging
 import random
-import trace
+
 from dataclasses import dataclass
 
 from autologging import traced
@@ -20,7 +20,11 @@ class Zemlja:
     hrana: Hrana = None
 
     def __post_init__(self):
-        self.snake = Snake(x=self.sirina / 2, y=self.sirina / 2, velikost=0)
+        self.snake = Snake(x=self.sirina / 2, y=self.visina / 2, dx=-1, dy=0, velikost=0)
         self.hrana = Hrana(
-            x=random.randint(0, self.sirina),
-            y=random.randint(0, self.visina))
+            x=random.randint(1, self.sirina - 1),
+            y=random.randint(1, self.visina - 1))
+
+    def nakljucna_vrednost(self):
+        self.hrana.x = random.randint(1, self.sirina - 1)
+        self.hrana.y = random.randint(1, self.sirina - 1)

@@ -13,3 +13,8 @@ class Test_Hrana(unittest.TestCase):
     def test___init__(self):
         self.assertEqual(self.hrana.x, self.hrana_x)
         self.assertEqual(self.hrana.y, self.hrana_y)
+
+    def test_nakljucne_postavitve_hrane(self):
+
+
+

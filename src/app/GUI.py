@@ -21,6 +21,7 @@ class GUI(App):
 
     def draw_game(self):
 
+        pygame.display.set_caption("Snake Game")
         # zapolni display z barvo, bela
         self.windowSurface.fill((255, 255, 255))
         dx = self.width / 10
@@ -30,9 +31,15 @@ class GUI(App):
             self.zemlja.snake.x * dx, self.zemlja.snake.y * dy,
             (20),
             (20)))
+        # nariši hrano
+        pygame.draw.rect(self.windowSurface, (0, 255, 0), (
+            self.zemlja.hrana.x * dx, self.zemlja.hrana.y * dy,
+            (20),
+            (20)))
 
     def end_game_conditions(self):
-        pass
+        if self.zemlja.snake.x == self.zemlja.hrana.x and self.zemlja.snake.y == self.zemlja.hrana.y:
+            self.zemlja.nakljucna_vrednost()
 
     def new_game(self):
         self.zemlja = Zemlja(
@@ -41,27 +48,33 @@ class GUI(App):
         )
 
     def input(self):
+        self.zemlja.snake.premikanje()
+
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
-                    pygame.display.update()
-                    self.zemlja.snake.premik(-1, 0)
+                if event.key == pygame.K_e:
+                    self.zemlja.snake.smer_premika(0, 1)
+                elif event.key == pygame.K_a:
+                    self.zemlja.snake.smer_premika(-1, 0)
                 elif event.key == pygame.K_d:
-                    self.zemlja.snake.premik(1, 0)
+                    self.zemlja.snake.smer_premika(1, 0)
                 elif event.key == pygame.K_w:
-                    self.zemlja.snake.premik(0, -1)
+                    self.zemlja.snake.smer_premika(0, -1)
                 elif event.key == pygame.K_s:
-                    self.zemlja.snake.premik(0, 1)
+                    self.zemlja.snake.smer_premika(0, 1)
                 elif event.key == pygame.q_q:
                     sys.exit()
 
 
-
 if __name__ == '__main__':
-    app = GUI(400, 400)
+    app = GUI(600, 600)
     running = True
     app.new_game()
+    # Create a clock object
+    clock = pygame.time.Clock()
     while running:
         app.draw_game()
         app.input()
         pygame.display.update()
+        app.end_game_conditions()
+        clock.tick(2)
