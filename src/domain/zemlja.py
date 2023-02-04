@@ -25,6 +25,6 @@ class Zemlja:
             x=random.randint(1, self.sirina - 1),
             y=random.randint(1, self.visina - 1))
 
-    def nakljucna_vrednost(self):
+    def nastavi_hrano(self):
         self.hrana.x = random.randint(1, self.sirina - 1)
         self.hrana.y = random.randint(1, self.sirina - 1)

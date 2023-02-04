@@ -18,7 +18,7 @@ class Test_Hrana(unittest.TestCase):
 
     def test_nakljucne_postavitve_hrane(self):
         for i in range(10):
-            self.zemlja.nakljucna_vrednost()
+            self.zemlja.nastavi_hrano()
             x = self.zemlja.hrana.x
             y = self.zemlja.hrana.y
             self.assertTrue(1 <= x <= self.zemlja.sirina - 1)

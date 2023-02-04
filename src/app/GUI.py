@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import pygame
 
 from src.app._app import App
+from src.domain.del_kace import DelKace
 from src.domain.hrana import Hrana
 from src.domain.snake import Snake
 from src.domain.zemlja import Zemlja
@@ -36,10 +37,24 @@ class GUI(App):
             self.zemlja.hrana.x * dx, self.zemlja.hrana.y * dy,
             (20),
             (20)))
+        # nariši del_kače
+        for i, d in enumerate(self.zemlja.snake.deli):
+            print(d.x, 'del_kače x', i)
+            print(d.y, 'del_kače y', i)
+            pygame.draw.rect(self.windowSurface, (0, 0, 0), (
+                d.x * dx, d.y * dy,
+                (20),
+                (20)))
 
     def end_game_conditions(self):
+        dx = self.width / 10
+        dy = self.height / 10
+
+        self.del_kace = DelKace(dx, dy)
         if self.zemlja.snake.x == self.zemlja.hrana.x and self.zemlja.snake.y == self.zemlja.hrana.y:
-            self.zemlja.nakljucna_vrednost()
+            # nariši del kače
+            self.zemlja.snake.dodaj_del_kace()
+            self.zemlja.nastavi_hrano()
 
     def new_game(self):
         self.zemlja = Zemlja(
