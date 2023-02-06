@@ -28,3 +28,9 @@ class Zemlja:
     def nastavi_hrano(self):
         self.hrana.x = random.randint(1, self.sirina - 1)
         self.hrana.y = random.randint(1, self.sirina - 1)
+
+    def konec(self) -> bool:
+        if 0 <= self.snake.x <= self.sirina and 0 <= self.snake.y <= self.visina:
+            return True
+        else:
+            return False
