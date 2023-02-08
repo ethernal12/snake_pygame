@@ -46,12 +46,10 @@ class Test_Snake(unittest.TestCase):
 
     def test_smpremembe_smeri(self):
         self.init_snake(x=self.snake_x, y=self.snake_y, dx=self.snake_dx, dy=self.snake_dy)
-        x = self.snake.x
         y = self.snake.y
         self.snake.premikanje()
         self.assertTrue(self.snake.y > y)
         x = self.snake.x
-        y = self.snake.y
         self.snake.smer_premika(1, 0)
         self.snake.premikanje()
         self.assertTrue(self.snake.x > x)

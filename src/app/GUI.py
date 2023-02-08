@@ -2,7 +2,7 @@ import sys
 from dataclasses import dataclass
 
 import pygame
-
+import time
 from src.app._app import App
 from src.domain.zemlja import Zemlja
 from src.app.GUItext import messages
@@ -14,14 +14,15 @@ class GUI(App):
     height: int
     zemlja = None
     tocke: int = 0
+    current_time: int = None
 
     def __post_init__(self):
         pygame.init()
         self.windowSurface = pygame.display.set_mode((self.width, self.height), 0, 32)
 
     def draw_game(self):
-
         pygame.display.set_caption("Snake Game")
+        self.current_time = time.strftime("%S")
         # zapolni display z barvo, bela
         self.windowSurface.fill((255, 255, 100))
         dx = self.width / 20
@@ -44,10 +45,11 @@ class GUI(App):
                 (20)))
 
     def end_game_conditions(self):
-        print(self.zemlja.snake.x, self.zemlja.snake.y)
-        messages(self.windowSurface, self.tocke)
-        # če se glava kače dotakne sama sebe
+
+        #messages(self.windowSurface, self.current_time, 'Time: ', 200, 0)
+        messages(self.windowSurface, self.tocke, 'Points: ', 0, 0)
         for i, d in enumerate(self.zemlja.snake.deli):
+            # če se glava kače dotakne sama sebe
             if d.x == self.zemlja.snake.x and d.y == self.zemlja.snake.y:
                 sys.exit()
         # če kača pobere hrano
