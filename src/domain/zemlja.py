@@ -30,7 +30,16 @@ class Zemlja:
         self.hrana.y = random.randint(1, self.sirina - 1)
 
     def konec(self) -> bool:
-        if 0 <= self.snake.x <= self.sirina and 0 <= self.snake.y <= self.visina:
+        # če je kaća v okviru dimenzij zemlje
+        if (0 <= self.snake.x < self.sirina) and (0 <= self.snake.y < self.visina):
             return True
+        else:
+            return False
+
+    def dodaj_del_kace_in_nastavi_hrano(self) -> int:
+        if self.snake.x == self.hrana.x and self.snake.y == self.hrana.y:
+            self.snake.dodaj_del_kace()
+            self.nastavi_hrano()
+            return 1
         else:
             return False

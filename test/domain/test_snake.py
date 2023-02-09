@@ -3,6 +3,7 @@ import unittest
 from src.domain.hrana import Hrana
 from src.domain.snake import Snake
 from src.domain.zemlja import Zemlja
+from src.app.GUI import GUI
 
 
 class Test_Snake(unittest.TestCase):
@@ -17,6 +18,7 @@ class Test_Snake(unittest.TestCase):
         self.snake_dy = 1
         self.snake = self.init_snake(x=self.snake_x, y=self.snake_y, dx=self.snake_dx, dy=self.snake_dy)
         self.zemlja = Zemlja(10, 10)
+        self.GUI = GUI(400, 400, 0)
 
     def test___init__(self):
         self.assertEqual(self.snake.x, self.snake_x)
@@ -54,4 +56,14 @@ class Test_Snake(unittest.TestCase):
         self.snake.premikanje()
         self.assertTrue(self.snake.x > x)
 
-
+    def test_pobiranje_hrane(self):
+        self.assertEqual(len(self.zemlja.snake.deli), 0)
+        self.zemlja.hrana.x = 10
+        self.zemlja.hrana.y = 10
+        self.zemlja.snake.x = 10
+        # self.zemlja.snake.smer_premika(1, 0)
+        # self.zemlja.snake.premikanje()
+        self.zemlja.snake.y = 10
+        int = self.zemlja.dodaj_del_kace_in_nastavi_hrano()
+        self.assertEqual(len(self.zemlja.snake.deli), 1)
+        self.assertEqual(int, 1)

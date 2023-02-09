@@ -15,7 +15,7 @@ from src.app.GUI import GUI
 # log.debug("To je debug %s", '123')
 # log.info("To je info %s", '123')
 # log.warning("To je warning %s", '123')
-# log.error("To je debug %s", '123')
+# log.error("To je debugwa%s", '123')
 
 app = GUI(600, 600)
 app.new_game()
@@ -26,6 +26,7 @@ while running:
     app.input()
     pygame.display.update()
     app.end_game_conditions()
+    app.poberi_hrano()
     clock.tick(5)
     if not app.zemlja.konec():
         running = False

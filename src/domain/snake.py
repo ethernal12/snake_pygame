@@ -35,4 +35,3 @@ class Snake:
     def dodaj_del_kace(self):
         del_kace = DelKace(x=self.x, y=self.y)
         self.deli.append(del_kace)
-
