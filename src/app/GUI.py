@@ -64,6 +64,7 @@ class GUI(App):
         )
 
     def input(self):
+
         self.zemlja.snake.premikanje()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
