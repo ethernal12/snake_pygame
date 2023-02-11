@@ -14,7 +14,7 @@ class Test_Zemlja(unittest.TestCase):
         self.zemlja = Zemlja(self.sirina, self.visina, )
 
     def test___init__(self):
-        for i in range(100):
+        for _ in range(100):
             self.zemlja = Zemlja(self.sirina, self.visina)
             self.assertEqual(self.zemlja.visina, self.visina)
             self.assertEqual(self.zemlja.sirina, self.sirina)
@@ -26,8 +26,8 @@ class Test_Zemlja(unittest.TestCase):
             self.assertTrue(0 <= self.zemlja.hrana.y <= self.visina)
 
     def test_konec_igre(self):
-        self.zemlja.snake.x = self.zemlja.sirina
-        self.zemlja.snake.y = self.zemlja.visina
+        self.zemlja.snake.x = self.zemlja.sirina - 1
+        self.zemlja.snake.y = self.zemlja.visina - 1
         self.assertEqual(self.zemlja.konec(), True)
         self.zemlja.snake.x = self.zemlja.sirina + 1
         self.zemlja.snake.y = self.zemlja.visina + 1

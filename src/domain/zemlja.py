@@ -20,7 +20,7 @@ class Zemlja:
     hrana: Hrana = None
 
     def __post_init__(self):
-        self.snake = Snake(x=self.sirina / 2, y=self.visina / 2, dx=-1, dy=0, velikost=0)
+        self.snake = Snake(x=self.sirina / 2, y=self.visina / 2, dx=-1, dy=0)
         self.hrana = Hrana(
             x=random.randint(1, self.sirina - 1),
             y=random.randint(1, self.visina - 1))
@@ -30,8 +30,8 @@ class Zemlja:
         self.hrana.y = random.randint(1, self.sirina - 1)
 
     def konec(self) -> bool:
-        # če je kaća v okviru dimenzij zemlje
-        if (0 <= self.snake.x < self.sirina) and (0 <= self.snake.y < self.visina):
+        # če je kača v okviru dimenzij zemlje
+        if 0 <= self.snake.x < self.sirina and 0 <= self.snake.y < self.visina:
             return True
         else:
             return False

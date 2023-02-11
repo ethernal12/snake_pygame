@@ -12,7 +12,6 @@ class Snake:
     y: int
     dx: int
     dy: int
-    velikost: int
     del_kace: list = field(default_factory=list)
     deli: list[DelKace] = field(default_factory=list)
 

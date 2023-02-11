@@ -1,6 +1,5 @@
 import pygame
 
-
 def messages(canvas, text, title, poistionX, positionY):
     # Nastavi font
     font = pygame.font.Font('freesansbold.ttf', 30)

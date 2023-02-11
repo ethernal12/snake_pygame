@@ -14,7 +14,8 @@ class GUI(App):
     height: int
     zemlja = None
     tocke: int = 0
-    current_time: int = None
+    dx: int = 0
+    dy: int = 0
 
     def __post_init__(self):
         pygame.init()
@@ -22,31 +23,29 @@ class GUI(App):
 
     def draw_game(self):
         pygame.display.set_caption("Snake Game")
-        self.current_time = time.strftime("%S")
         # zapolni display z barvo, bela
         self.windowSurface.fill((255, 255, 100))
-        dx = self.width / 20
-        dy = self.height / 20
+        self.dx = self.width / 20
+        self.dy = self.height / 20
         # nariši kačo
         pygame.draw.rect(self.windowSurface, (0, 0, 0), (
-            self.zemlja.snake.x * dx, self.zemlja.snake.y * dy,
+            self.zemlja.snake.x * self.dx, self.zemlja.snake.y * self.dy,
             (20),
             (20)))
         # nariši hrano
         pygame.draw.rect(self.windowSurface, (0, 255, 0), (
-            self.zemlja.hrana.x * dx, self.zemlja.hrana.y * dy,
+            self.zemlja.hrana.x * self.dx, self.zemlja.hrana.y * self.dy,
             (20),
             (20)))
         # nariši del_kače
         for i, d in enumerate(self.zemlja.snake.deli):
             pygame.draw.rect(self.windowSurface, (0, 0, 0), (
-                d.x * dx, d.y * dy,
+                d.x * self.dx, d.y * self.dy,
                 (20),
                 (20)))
 
     def end_game_conditions(self):
 
-        # messages(self.windowSurface, self.current_time, 'Time: ', 200, 0)
         messages(self.windowSurface, self.tocke, 'Points: ', 0, 0)
         for i, d in enumerate(self.zemlja.snake.deli):
             # če se glava kače dotakne sama sebe
@@ -56,7 +55,6 @@ class GUI(App):
     def poberi_hrano(self):
         # če kača pobere hrano
         int = self.zemlja.dodaj_del_kace_in_nastavi_hrano()
-        print(int)
         self.tocke += int
 
     def new_game(self):

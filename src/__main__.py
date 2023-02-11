@@ -7,7 +7,7 @@ from src.app.GUI import GUI
 
 
 # from autologging import TRACE
-#
+
 # logging.basicConfig(level=TRACE, stream=sys.stdout,
 #                     format="%(asctime)s.%(msecs)04d ┃ %(filename)+20s ┃ %(funcName)-30s ┃ %(levelname)+8s ┃ %(message)s")
 #
