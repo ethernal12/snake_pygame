@@ -20,8 +20,10 @@ class Snake:
         self.dy = dy
 
     def premikanje(self):
+
         last_x = self.x
         last_y = self.y
+        # premikanje npr.(1,0), desno
         self.x += self.dx
         self.y += self.dy
         for i in range(len(self.deli) - 1, 0, -1):

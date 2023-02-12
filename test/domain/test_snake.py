@@ -22,7 +22,7 @@ class Test_Snake(unittest.TestCase):
         self.assertEqual(self.snake.x, self.snake_x)
         self.assertEqual(self.snake.y, self.snake_y)
 
-    def test_premik(self):
+    def test_premik_glave(self):
         for i in range(5):
             # pozitivna sprememba
             self.snake = self.init_snake(x=self.snake_x, y=self.snake_y, dx=self.snake_dx, dy=self.snake_dy)
@@ -44,6 +44,22 @@ class Test_Snake(unittest.TestCase):
             y_nova = self.snake.y
             self.assertTrue(x > x_nova)
             self.assertTrue(y > y_nova)
+
+    def test_premik_telesa_kače(self):
+        # dodaj N * kos kace
+        for _ in range(2):
+            self.snake.dodaj_del_kace()
+        self.snake.smer_premika(self.snake_dx, 0)
+        # premakni kačo dokler ni premaknjen ves del kače
+        for i in range(2):
+            self.snake.premikanje()
+            for j in range(len(self.snake.deli)):
+                print(self.snake.deli[j].x)
+                if i > 0:
+                    if j == 0:
+                        self.assertEqual(self.snake.deli[j].x, self.snake.x - 1)
+                    elif j > 0:
+                        self.assertEqual(self.snake.deli[j].x, self.snake.deli[j - 1].x - 1)
 
     def test_smpremembe_smeri(self):
         self.init_snake(x=self.snake_x, y=self.snake_y, dx=self.snake_dx, dy=self.snake_dy)

@@ -2,10 +2,9 @@ import sys
 from dataclasses import dataclass
 
 import pygame
-import time
 from src.app._app import App
 from src.domain.zemlja import Zemlja
-from src.app.GUItext import messages
+from typing import Optional
 
 
 @dataclass
@@ -16,6 +15,7 @@ class GUI(App):
     tocke: int = 0
     dx: int = 0
     dy: int = 0
+    windowSurface: Optional[pygame.Surface] = None
 
     def __post_init__(self):
         pygame.init()
@@ -28,25 +28,25 @@ class GUI(App):
         self.dx = self.width / 20
         self.dy = self.height / 20
         # nariši kačo
-        pygame.draw.rect(self.windowSurface, (0, 0, 0), (
+        pygame.draw.rect(surface=self.windowSurface, color=(0, 0, 0), rect=(
             self.zemlja.snake.x * self.dx, self.zemlja.snake.y * self.dy,
             (20),
             (20)))
         # nariši hrano
-        pygame.draw.rect(self.windowSurface, (0, 255, 0), (
+        pygame.draw.rect(surface=self.windowSurface, color=(0, 255, 0), rect=(
             self.zemlja.hrana.x * self.dx, self.zemlja.hrana.y * self.dy,
             (20),
             (20)))
         # nariši del_kače
         for i, d in enumerate(self.zemlja.snake.deli):
-            pygame.draw.rect(self.windowSurface, (0, 0, 0), (
+            pygame.draw.rect(surface=self.windowSurface, color=(0, 0, 0), rect=(
                 d.x * self.dx, d.y * self.dy,
                 (20),
                 (20)))
 
     def end_game_conditions(self):
 
-        messages(self.windowSurface, self.tocke, 'Points: ', 0, 0)
+        self.messages(self.tocke, 'Points: ', 0, 0)
         for i, d in enumerate(self.zemlja.snake.deli):
             # če se glava kače dotakne sama sebe
             if d.x == self.zemlja.snake.x and d.y == self.zemlja.snake.y:
@@ -80,3 +80,12 @@ class GUI(App):
                     self.zemlja.snake.smer_premika(0, 1)
                 elif event.key == pygame.q_q:
                     sys.exit()
+
+    def messages(self, text, title, poistionX, positionY):
+        # Nastavi font
+        font = pygame.font.Font('freesansbold.ttf', 30)
+        # Ustvari text podlago
+        text_podlaga = font.render(f'{title} {str(text)}', True, (0, 0, 0))
+        # Nariši text na canvas
+        self.windowSurface.blit(text_podlaga, (poistionX, positionY))
+        pygame.display.update()
