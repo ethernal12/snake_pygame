@@ -43,3 +43,11 @@ class Zemlja:
             return 1
         else:
             return False
+    # testiraj postavitve hrane
+    def test_nakljucne_postavitve_hrane(self):
+        for i in range(10):
+            self.zemlja.nastavi_hrano()
+            x = self.zemlja.hrana.x
+            y = self.zemlja.hrana.y
+            self.assertTrue(1 <= x <= self.zemlja.sirina - 1)
+            self.assertTrue(1 <= y <= self.zemlja.sirina - 1)

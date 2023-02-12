@@ -12,7 +12,6 @@ class Snake:
     y: int
     dx: int
     dy: int
-    del_kace: list = field(default_factory=list)
     deli: list[DelKace] = field(default_factory=list)
 
     def smer_premika(self, dx: int, dy: int):
@@ -20,7 +19,6 @@ class Snake:
         self.dy = dy
 
     def premikanje(self):
-
         last_x = self.x
         last_y = self.y
         # premikanje npr.(1,0), desno
@@ -34,5 +32,5 @@ class Snake:
             self.deli[0].y = last_y
 
     def dodaj_del_kace(self):
-        del_kace = DelKace(x=self.x, y=self.y)
+        del_kace = DelKace(x=self.deli[-1].x, y=self.deli[-1].y)
         self.deli.append(del_kace)

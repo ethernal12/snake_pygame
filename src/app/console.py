@@ -1,2 +1,3 @@
 @dataclass
 class Console:
+    pass
