@@ -2,9 +2,7 @@ import logging
 import random
 
 from dataclasses import dataclass
-
 from autologging import traced
-
 from src.domain.hrana import Hrana
 from src.domain.snake import Snake
 
@@ -22,12 +20,12 @@ class Zemlja:
     def __post_init__(self):
         self.snake = Snake(x=self.sirina / 2, y=self.visina / 2, dx=-1, dy=0)
         self.hrana = Hrana(
-            x=random.randint(1, self.sirina - 1),
-            y=random.randint(1, self.visina - 1))
+            x=random.randint(0, self.sirina),
+            y=random.randint(0, self.visina))
 
     def nastavi_hrano(self):
-        self.hrana.x = random.randint(1, self.sirina - 1)
-        self.hrana.y = random.randint(1, self.sirina - 1)
+        self.hrana.x = random.randint(0, self.sirina)
+        self.hrana.y = random.randint(0, self.sirina)
 
     def konec(self) -> bool:
         # če je kača v okviru dimenzij zemlje
@@ -42,12 +40,6 @@ class Zemlja:
             self.nastavi_hrano()
             return 1
         else:
-            return False
-    # testiraj postavitve hrane
-    def test_nakljucne_postavitve_hrane(self):
-        for i in range(10):
-            self.zemlja.nastavi_hrano()
-            x = self.zemlja.hrana.x
-            y = self.zemlja.hrana.y
-            self.assertTrue(1 <= x <= self.zemlja.sirina - 1)
-            self.assertTrue(1 <= y <= self.zemlja.sirina - 1)
+            return 0
+
+

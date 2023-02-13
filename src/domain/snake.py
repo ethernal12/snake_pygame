@@ -32,5 +32,11 @@ class Snake:
             self.deli[0].y = last_y
 
     def dodaj_del_kace(self):
-        del_kace = DelKace(x=self.deli[-1].x, y=self.deli[-1].y)
-        self.deli.append(del_kace)
+        if self.deli:
+            del_kace = DelKace(x=self.deli[-1].x, y=self.deli[-1].y)
+            self.deli.append(del_kace)
+        else:
+            del_kace = DelKace(x=self.x, y=self.y)
+            self.deli.append(del_kace)
+
+

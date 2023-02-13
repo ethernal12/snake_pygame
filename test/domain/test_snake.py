@@ -2,8 +2,6 @@ import unittest
 
 from src.domain.del_kace import DelKace
 from src.domain.snake import Snake
-from src.domain.zemlja import Zemlja
-from src.app.GUI import GUI
 
 
 class Test_Snake(unittest.TestCase):
