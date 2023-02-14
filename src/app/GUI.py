@@ -64,13 +64,10 @@ class GUI(App):
         )
 
     def input(self):
-
         self.zemlja.snake.premikanje()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_e:
-                    self.zemlja.snake.smer_premika(0, 1)
-                elif event.key == pygame.K_a:
+                if event.key == pygame.K_a:
                     self.zemlja.snake.smer_premika(-1, 0)
                 elif event.key == pygame.K_d:
                     self.zemlja.snake.smer_premika(1, 0)
@@ -78,7 +75,8 @@ class GUI(App):
                     self.zemlja.snake.smer_premika(0, -1)
                 elif event.key == pygame.K_s:
                     self.zemlja.snake.smer_premika(0, 1)
-                elif event.key == pygame.q_q:
+                elif event.key == pygame.K_q:
+                    print('quit')
                     sys.exit()
 
     def messages(self, text, title, poistionX, positionY):

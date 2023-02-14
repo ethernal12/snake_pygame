@@ -19,6 +19,7 @@ class Snake:
         self.dy = dy
 
     def premikanje(self):
+        print('premikanje')
         last_x = self.x
         last_y = self.y
         # premikanje npr.(1,0), desno
@@ -38,5 +39,3 @@ class Snake:
         else:
             del_kace = DelKace(x=self.x, y=self.y)
             self.deli.append(del_kace)
-
-
