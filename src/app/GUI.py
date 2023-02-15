@@ -45,7 +45,6 @@ class GUI(App):
                 (20)))
 
     def end_game_conditions(self):
-
         self.messages(self.tocke, 'Points: ', 0, 0)
         for i, d in enumerate(self.zemlja.snake.deli):
             # če se glava kače dotakne sama sebe

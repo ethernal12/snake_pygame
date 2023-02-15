@@ -22,13 +22,17 @@ class Test_Zemlja(unittest.TestCase):
             # novo stanje
             stara_sirina = self.zemlja.sirina
             stara_visina = self.zemlja.visina
+
             self.zemlja.sirina = 9
             self.zemlja.visina = 8
+
+            # potrditev, da vrednosti niso enake, zavoljo naslednjega testa
             self.assertNotEqual(stara_sirina, self.zemlja.sirina)
             self.assertNotEqual(stara_visina, self.zemlja.visina)
 
-            self.assertEqual(self.zemlja.visina, self.visina)
-            self.assertEqual(self.zemlja.sirina, self.sirina)
+            # potrditev spremembe vrednosti
+            self.assertEqual(self.zemlja.visina, 8)
+            self.assertEqual(self.zemlja.sirina, 9)
 
             self.assertTrue(isinstance(self.zemlja.snake, Snake))
             self.assertTrue(isinstance(self.zemlja.hrana, Hrana))
@@ -80,6 +84,3 @@ class Test_Zemlja(unittest.TestCase):
         self.zemlja.dodaj_del_kace_in_nastavi_hrano()
         self.assertNotEqual(stara_vrednost_hrane_x, self.zemlja.hrana.x)
         self.assertNotEqual(stara_vrednost_hrane_y, self.zemlja.hrana.y)
-
-
-

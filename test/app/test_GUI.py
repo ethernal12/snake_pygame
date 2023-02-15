@@ -101,7 +101,7 @@ class Test_GUI(unittest.TestCase):
         self.assertEqual(self.GUI.zemlja.snake.x, 11)
         self.assertEqual(self.GUI.zemlja.snake.y, 10)
 
-        # # testiranje premika s tipko w - gor
+        # testiranje premika s tipko w - gor
 
         self.snake_reset()
         self.assertEqual(self.GUI.zemlja.snake.dx, 0)
