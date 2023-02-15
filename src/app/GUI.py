@@ -76,7 +76,6 @@ class GUI(App):
                 elif event.key == pygame.K_s:
                     self.zemlja.snake.smer_premika(0, 1)
                 elif event.key == pygame.K_q:
-                    print('quit')
                     sys.exit()
 
     def messages(self, text, title, poistionX, positionY):

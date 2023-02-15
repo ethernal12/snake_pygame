@@ -19,7 +19,6 @@ class Snake:
         self.dy = dy
 
     def premikanje(self):
-        print('premikanje')
         last_x = self.x
         last_y = self.y
         # premikanje npr.(1,0), desno

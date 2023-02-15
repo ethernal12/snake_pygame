@@ -16,7 +16,6 @@ class Test_GUI(unittest.TestCase):
         self.zemlja.snake = self.snake
 
     @patch('pygame.event.get', return_value=[
-        pygame.event.Event(pygame.KEYDOWN, key=pygame.K_e),
         pygame.event.Event(pygame.KEYDOWN, key=pygame.K_w),
         pygame.event.Event(pygame.KEYDOWN, key=pygame.K_d),
         pygame.event.Event(pygame.KEYDOWN, key=pygame.K_s),
@@ -33,6 +32,12 @@ class Test_GUI(unittest.TestCase):
 
     def test_end_game_conditions(self):
         pass
+
+    def snake_reset(self):
+        self.GUI.zemlja.snake.x = 10
+        self.GUI.zemlja.snake.y = 10
+        self.GUI.zemlja.snake.dx = 0
+        self.GUI.zemlja.snake.dy = 0
 
     def test_new_game(self):
         # začetno stanje
@@ -57,64 +62,85 @@ class Test_GUI(unittest.TestCase):
         event = MagicMock()
         event.type = pygame.KEYDOWN
 
-        # pokličemo funkcijo input()
-
         # testiranje premika s tipko a - levo
         event.key = pygame.K_a
         pygame.event.get = MagicMock(return_value=[event])
-        self.GUI.zemlja.snake.dx = 0
-        self.GUI.zemlja.snake.dy = 0
+        self.snake_reset()
         self.assertEqual(self.GUI.zemlja.snake.dx, 0)
         self.assertEqual(self.GUI.zemlja.snake.dy, 0)
+        self.assertEqual(self.GUI.zemlja.snake.x, 10)
+        self.assertEqual(self.GUI.zemlja.snake.y, 10)
 
+        # test spremembe smeri
         self.GUI.input()
         self.assertEqual(self.GUI.zemlja.snake.dx, -1)
         self.assertEqual(self.GUI.zemlja.snake.dy, 0)
 
-        # testiranje premika s tipko d - desno
-        self.GUI.zemlja.snake.dx = 0
-        self.GUI.zemlja.snake.dy = 0
-        self.assertEqual(self.GUI.zemlja.snake.dx, 0)
-        self.assertEqual(self.GUI.zemlja.snake.dy, 0)
+        # test premikanja
+        self.GUI.input()
+        self.assertEqual(self.GUI.zemlja.snake.x, 9)
+        self.assertEqual(self.GUI.zemlja.snake.y, 10)
 
+        # testiranje premika s tipko d - desno
+        self.snake_reset()
         self.assertEqual(self.GUI.zemlja.snake.dx, 0)
         self.assertEqual(self.GUI.zemlja.snake.dy, 0)
+        self.assertEqual(self.GUI.zemlja.snake.x, 10)
+        self.assertEqual(self.GUI.zemlja.snake.y, 10)
+
         event.key = pygame.K_d
         pygame.event.get = MagicMock(return_value=[event])
-        self.GUI.input()
 
+        self.GUI.input()
+        # test spremembe smeri
         self.assertEqual(self.GUI.zemlja.snake.dx, 1)
         self.assertEqual(self.GUI.zemlja.snake.dy, 0)
 
-        # testiranje premika s tipko w - gor
-        self.GUI.zemlja.snake.dx = 0
-        self.GUI.zemlja.snake.dy = 0
-        self.assertEqual(self.GUI.zemlja.snake.dx, 0)
-        self.assertEqual(self.GUI.zemlja.snake.dy, 0)
+        # test premikanja
+        self.GUI.input()
+        self.assertEqual(self.GUI.zemlja.snake.x, 11)
+        self.assertEqual(self.GUI.zemlja.snake.y, 10)
 
+        # # testiranje premika s tipko w - gor
+
+        self.snake_reset()
         self.assertEqual(self.GUI.zemlja.snake.dx, 0)
         self.assertEqual(self.GUI.zemlja.snake.dy, 0)
+        self.assertEqual(self.GUI.zemlja.snake.x, 10)
+        self.assertEqual(self.GUI.zemlja.snake.y, 10)
+
         event.key = pygame.K_w
         pygame.event.get = MagicMock(return_value=[event])
-        self.GUI.input()
 
+        self.GUI.input()
+        # test spremembe smeri
         self.assertEqual(self.GUI.zemlja.snake.dx, 0)
         self.assertEqual(self.GUI.zemlja.snake.dy, -1)
 
-        # testiranje premika s tipko s - dol
-        self.GUI.zemlja.snake.dx = 0
-        self.GUI.zemlja.snake.dy = 0
-        self.assertEqual(self.GUI.zemlja.snake.dx, 0)
-        self.assertEqual(self.GUI.zemlja.snake.dy, 0)
+        # test premikanja
+        self.GUI.input()
+        self.assertEqual(self.GUI.zemlja.snake.x, 10)
+        self.assertEqual(self.GUI.zemlja.snake.y, 9)
 
+        # testiranje premika s tipko s - dol
+        self.snake_reset()
         self.assertEqual(self.GUI.zemlja.snake.dx, 0)
         self.assertEqual(self.GUI.zemlja.snake.dy, 0)
+        self.assertEqual(self.GUI.zemlja.snake.x, 10)
+        self.assertEqual(self.GUI.zemlja.snake.y, 10)
+
         event.key = pygame.K_s
         pygame.event.get = MagicMock(return_value=[event])
-        self.GUI.input()
 
+        self.GUI.input()
+        # test spremembe smeri
         self.assertEqual(self.GUI.zemlja.snake.dx, 0)
         self.assertEqual(self.GUI.zemlja.snake.dy, 1)
+
+        # test premikanja
+        self.GUI.input()
+        self.assertEqual(self.GUI.zemlja.snake.x, 10)
+        self.assertEqual(self.GUI.zemlja.snake.y, 11)
 
         # testiranje izhoda ob pritisku tipke q
         with patch('sys.exit') as mock_sys_exit:
@@ -124,6 +150,3 @@ class Test_GUI(unittest.TestCase):
             self.GUI.input()
 
             mock_sys_exit.assert_called_once()
-
-
-
