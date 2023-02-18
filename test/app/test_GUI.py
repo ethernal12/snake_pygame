@@ -40,20 +40,20 @@ class Test_GUI(unittest.TestCase):
         # začetno stanje
         self.assertEqual(self.GUI.zemlja, None)
         # efekt
-        self.GUI.new_game()
+        self.GUI.init()
         # test spremembe
         self.assertEqual(self.GUI.zemlja.sirina, 20)
         self.assertEqual(self.GUI.zemlja.visina, 20)
 
     def test_draw_game(self):
-        self.GUI.new_game()
-        self.GUI.draw_game()
+        self.GUI.init()
+        self.GUI.draw()
         self.assertEqual(self.GUI.dx, self.GUI.width / self.GUI.dx)
         self.assertEqual(self.GUI.dy, self.GUI.height / self.GUI.dx)
 
     def test_input(self):
         # kličemo funkcijo da se ustvari objekt zemlja in tako snake objekt
-        self.GUI.new_game()
+        self.GUI.init()
 
         # zmokamo event
         event = MagicMock()

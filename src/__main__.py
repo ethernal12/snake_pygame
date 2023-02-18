@@ -19,14 +19,10 @@ from app.GUI import GUI
 # log.error("To je debugwa%s", '123')
 
 app = GUI(600, 600)
-app.new_game()
-running = True
-clock = pygame.time.Clock()
-while running:
-    app.draw_game()
+app.init()
+
+while not app.konec():
+    app.draw()
     app.input()
-    pygame.display.update()
-    app.zemlja.dodaj_del_kace_in_nastavi_hrano()
-    clock.tick(5)
-    if not app.zemlja.konec():
-        running = False
+
+

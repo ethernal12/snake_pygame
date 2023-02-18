@@ -96,7 +96,7 @@ class Test_Zemlja(unittest.TestCase):
         # efekt
         self.zemlja.snake.x = self.zemlja.hrana.x
         self.zemlja.snake.y = self.zemlja.hrana.y
-        self.zemlja.dodaj_del_kace_in_nastavi_hrano()
+        self.zemlja.premakni()
         self.assertEqual(self.zemlja.tocke, 1)
         # končna vrednost
         self.assertEqual(len(self.zemlja.snake.deli), 1)
@@ -106,6 +106,6 @@ class Test_Zemlja(unittest.TestCase):
         # efekt
         self.zemlja.snake.x = self.zemlja.hrana.x
         self.zemlja.snake.y = self.zemlja.hrana.y - 1
-        self.zemlja.dodaj_del_kace_in_nastavi_hrano()
+        self.zemlja.premakni()
         self.assertEqual(self.zemlja.snake.deli, [])
         self.assertEqual(self.zemlja.tocke, 0)
