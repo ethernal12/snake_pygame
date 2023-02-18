@@ -27,8 +27,8 @@ class Zemlja:
 
     def nastavi_hrano(self):
         # dodano 1 in -1, da ni pozicija hrane izven meja zemlje
-        self.hrana.x = random.randint(1, self.sirina - 1)
-        self.hrana.y = random.randint(1, self.visina - 1)
+        self.hrana.x = random.randint(1, self.sirina)
+        self.hrana.y = random.randint(1, self.visina)
 
     def konec(self) -> bool:
         # če ima kača več kot 2 dela glej za dotik
