@@ -43,6 +43,7 @@ class GUI(App):
                 d.x * self.dx, d.y * self.dy,
                 (20),
                 (20)))
+
     def new_game(self):
         self.zemlja = Zemlja(
             sirina=20,
@@ -50,6 +51,7 @@ class GUI(App):
         )
 
     def input(self):
+        self.messages(self.zemlja.tocke, 'Points:', 0, 0)
         self.zemlja.snake.premikanje()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
