@@ -25,8 +25,7 @@ while running:
     app.draw_game()
     app.input()
     pygame.display.update()
-    app.end_game_conditions()
-    app.poberi_hrano()
+    app.zemlja.dodaj_del_kace_in_nastavi_hrano()
     clock.tick(5)
     if not app.zemlja.konec():
         running = False

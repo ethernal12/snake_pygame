@@ -30,9 +30,6 @@ class Test_GUI(unittest.TestCase):
         self.assertEqual(self.GUI.dx, 0)
         self.assertTrue(isinstance(self.GUI.windowSurface, pygame.Surface))
 
-    def test_end_game_conditions(self):
-        pass
-
     def snake_reset(self):
         self.GUI.zemlja.snake.x = 10
         self.GUI.zemlja.snake.y = 10

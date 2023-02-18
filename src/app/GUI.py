@@ -43,19 +43,6 @@ class GUI(App):
                 d.x * self.dx, d.y * self.dy,
                 (20),
                 (20)))
-
-    def end_game_conditions(self):
-        self.messages(self.tocke, 'Points: ', 0, 0)
-        for i, d in enumerate(self.zemlja.snake.deli):
-            # če se glava kače dotakne sama sebe
-            if d.x == self.zemlja.snake.x and d.y == self.zemlja.snake.y:
-                sys.exit()
-
-    def poberi_hrano(self):
-        # če kača pobere hrano
-        int = self.zemlja.dodaj_del_kace_in_nastavi_hrano()
-        self.tocke += int
-
     def new_game(self):
         self.zemlja = Zemlja(
             sirina=20,

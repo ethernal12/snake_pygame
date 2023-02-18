@@ -13,6 +13,3 @@ class App(ABC):
     def input(self):
         pass
 
-    @abstractmethod
-    def end_game_conditions(self):
-        pass

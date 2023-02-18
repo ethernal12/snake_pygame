@@ -1,6 +1,7 @@
 import logging
 import unittest
 
+from src.domain.del_kace import DelKace
 from src.domain.hrana import Hrana
 from src.domain.snake import Snake
 from src.domain.zemlja import Zemlja
@@ -11,7 +12,7 @@ class Test_Zemlja(unittest.TestCase):
     def setUp(self) -> None:
         self.sirina = 10
         self.visina = 10
-        self.zemlja = Zemlja(self.sirina, self.visina, )
+        self.zemlja = Zemlja(self.sirina, self.visina)
 
     def test___init__(self):
         for _ in range(100):
@@ -19,20 +20,7 @@ class Test_Zemlja(unittest.TestCase):
             self.zemlja = Zemlja(self.sirina, self.visina)
             self.assertEqual(self.zemlja.visina, self.visina)
             self.assertEqual(self.zemlja.sirina, self.sirina)
-            # novo stanje
-            stara_sirina = self.zemlja.sirina
-            stara_visina = self.zemlja.visina
-
-            self.zemlja.sirina = 9
-            self.zemlja.visina = 8
-
-            # potrditev, da vrednosti niso enake, zavoljo naslednjega testa
-            self.assertNotEqual(stara_sirina, self.zemlja.sirina)
-            self.assertNotEqual(stara_visina, self.zemlja.visina)
-
-            # potrditev spremembe vrednosti
-            self.assertEqual(self.zemlja.visina, 8)
-            self.assertEqual(self.zemlja.sirina, 9)
+            self.assertEqual(self.zemlja.tocke, 0)
 
             self.assertTrue(isinstance(self.zemlja.snake, Snake))
             self.assertTrue(isinstance(self.zemlja.hrana, Hrana))
@@ -51,36 +39,73 @@ class Test_Zemlja(unittest.TestCase):
             self.assertTrue(0 <= self.zemlja.hrana.y <= self.zemlja.visina)
 
     def test_konec_(self):
-        self.zemlja.snake.x = self.zemlja.sirina - 1
-        self.zemlja.snake.y = self.zemlja.visina - 1
+        # testiraj če se glava dotika dela kače z enim delom
+
+        self.zemlja.snake.deli = [DelKace(self.zemlja.snake.x, self.zemlja.snake.y)]
         self.assertEqual(self.zemlja.konec(), True)
-        self.zemlja.snake.x = self.zemlja.sirina + 1
-        self.zemlja.snake.y = self.zemlja.visina + 1
+        # testiraj če se glava dotika dela kače z dvemi deli
+
+        self.zemlja.snake.deli = [DelKace(self.zemlja.snake.x, self.zemlja.snake.y),
+                                  DelKace(self.zemlja.snake.x, self.zemlja.snake.y)]
         self.assertEqual(self.zemlja.konec(), False)
 
+        # ustvari in  testiraj kombinacije pozicije kače izven obsega zemlje
+        x, y = self.sirina + 1, 5
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), False)
+        x, y = - 1, 5
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), False)
+        x, y = 5, self.visina + 1
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), False)
+        x, y = 5, - 1
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), False)
+        # ustvari in  testiraj  kombinacije pozicije kače znotraj obsega zemlje
+        x, y = self.sirina - 1, 5
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), True)
+        x, y = 1, 5
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), True)
+        x, y = 5, self.visina - 1
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), True)
+        x, y = 5, 1
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), True)
+        # ustvari in  testiraj  pozcijo kače na robovih
+        x, y = 0, 0
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), True)
+        x, y = 0, self.visina
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), True)
+        x, y = self.sirina, 0
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), True)
+        x, y = self.sirina, self.visina
+        self.zemlja.snake.x, self.zemlja.snake.y = x, y
+        self.assertEqual(self.zemlja.konec(), True)
+
     def test_dodaj_del_kace_in_nastavi_hrano(self):
-        # testiranje return vrednosti
-        self.zemlja.snake.x = self.zemlja.hrana.x
-        self.zemlja.snake.y = self.zemlja.hrana.y
-        self.assertEqual(self.zemlja.dodaj_del_kace_in_nastavi_hrano(), 1)
-        self.zemlja.hrana.y = 5
-        self.assertEqual(self.zemlja.dodaj_del_kace_in_nastavi_hrano(), 0)
-        # testiranje efekta dodajanja dela kače
-        # začetno stanje
-        self.zemlja.snake.deli = []
+        # začetna vrednost
         self.assertEqual(self.zemlja.snake.deli, [])
+        self.assertEqual(self.zemlja.tocke, 0)
+        # efekt
         self.zemlja.snake.x = self.zemlja.hrana.x
         self.zemlja.snake.y = self.zemlja.hrana.y
-        # efekt
         self.zemlja.dodaj_del_kace_in_nastavi_hrano()
-        self.assertNotEqual(self.zemlja.snake.deli, [])
-        # testiranje efekta nastavljanja hrane
+        self.assertEqual(self.zemlja.tocke, 1)
+        # končna vrednost
+        self.assertEqual(len(self.zemlja.snake.deli), 1)
+        # reset vrednosti
+        self.zemlja.snake.deli = []
+        self.zemlja.tocke = 0
+        # efekt
         self.zemlja.snake.x = self.zemlja.hrana.x
-        self.zemlja.snake.y = self.zemlja.hrana.y
-        # začetno stanje
-        stara_vrednost_hrane_x = self.zemlja.hrana.x
-        stara_vrednost_hrane_y = self.zemlja.hrana.y
-        # efekt
+        self.zemlja.snake.y = self.zemlja.hrana.y - 1
         self.zemlja.dodaj_del_kace_in_nastavi_hrano()
-        self.assertNotEqual(stara_vrednost_hrane_x, self.zemlja.hrana.x)
-        self.assertNotEqual(stara_vrednost_hrane_y, self.zemlja.hrana.y)
+        self.assertEqual(self.zemlja.snake.deli, [])
+        self.assertEqual(self.zemlja.tocke, 0)

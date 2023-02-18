@@ -1,8 +1,6 @@
 import unittest
 
 from src.domain.hrana import Hrana
-from src.domain.zemlja import Zemlja
-
 
 class Test_Hrana(unittest.TestCase):
 
