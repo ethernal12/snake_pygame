@@ -1,10 +1,11 @@
-import logging
 import sys
+import os
 
+# adding directory to python path!
+sys.path.append(os.getcwd())
 import pygame
 
-from src.app.GUI import GUI
-
+from app.GUI import GUI
 
 # from autologging import TRACE
 
