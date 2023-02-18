@@ -3,20 +3,18 @@
 ### Konfiguracije igre:
 
 
-* Kloniraj REPO in v root direktoriju zaženi \__main__.py z ukazom:
-
-* inštaliraj zunanje knjižnice z ukazom:
+* Kloniraj REPO in inštaliraj zunanje knjižnice z ukazom :
 
 ~~~
 pip install -r requirements.txt
 
 ~~~
 
-* Poženi igro z ukazom:
-
+* V root direktoriju zaženi \__main__.py z ukazom:
 ~~~
 python src
 ~~~
+
 
 ### Kako igrati igro:
 * Igra se začne z začetno postavitvijo kače na sredini igrišča.
