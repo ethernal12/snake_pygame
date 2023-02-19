@@ -42,54 +42,54 @@ class Test_Zemlja(unittest.TestCase):
         # testiraj če se glava dotika dela kače z enim delom
 
         self.zemlja.snake.deli = [DelKace(self.zemlja.snake.x, self.zemlja.snake.y)]
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
         # testiraj če se glava dotika dela kače z dvemi deli
 
         self.zemlja.snake.deli = [DelKace(self.zemlja.snake.x, self.zemlja.snake.y),
                                   DelKace(self.zemlja.snake.x, self.zemlja.snake.y)]
-        self.assertEqual(self.zemlja.konec(), False)
+        self.assertEqual(self.zemlja.konec(), True)
 
         # ustvari in  testiraj kombinacije pozicije kače izven obsega zemlje
         x, y = self.sirina + 1, 5
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), False)
+        self.assertEqual(self.zemlja.konec(), True)
         x, y = - 1, 5
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), False)
+        self.assertEqual(self.zemlja.konec(), True)
         x, y = 5, self.visina + 1
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), False)
+        self.assertEqual(self.zemlja.konec(), True)
         x, y = 5, - 1
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), False)
+        self.assertEqual(self.zemlja.konec(), True)
         # ustvari in  testiraj  kombinacije pozicije kače znotraj obsega zemlje
         x, y = self.sirina - 1, 5
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
         x, y = 1, 5
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
         x, y = 5, self.visina - 1
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
         x, y = 5, 1
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
         # ustvari in  testiraj  pozcijo kače na robovih
         x, y = 0, 0
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
         x, y = 0, self.visina
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
         x, y = self.sirina, 0
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
         x, y = self.sirina, self.visina
         self.zemlja.snake.x, self.zemlja.snake.y = x, y
-        self.assertEqual(self.zemlja.konec(), True)
+        self.assertEqual(self.zemlja.konec(), False)
 
-    def test_dodaj_del_kace_in_nastavi_hrano(self):
+    def test_premakni(self):
         # začetna vrednost
         self.assertEqual(self.zemlja.snake.deli, [])
         self.assertEqual(self.zemlja.tocke, 0)

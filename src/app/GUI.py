@@ -31,8 +31,8 @@ class GUI(App):
         # zapolni display z barvo, bela
         self.windowSurface.fill((255, 255, 100))
         self._messages(self.zemlja.tocke, 'Points:', 0, 0)
-        self.dx = self.width // self.velikost_kvadrata
-        self.dy = self.height // self.velikost_kvadrata
+        self.dx = self.velikost_kvadrata
+        self.dy = self.velikost_kvadrata
         # nariši kačo
         pygame.draw.rect(surface=self.windowSurface, color=(0, 0, 0), rect=(
             self.zemlja.snake.x * self.dx, self.zemlja.snake.y * self.dy,
@@ -51,17 +51,17 @@ class GUI(App):
                 self.velikost_kvadrata))
         pygame.display.update()
 
-    # TODO: POGRUNTAJ IZRAČUN ZA ŠI. IN VI.
     def init(self):
         self.zemlja = Zemlja(
-            sirina=20,
-            visina=20
+            sirina=self.width // self.velikost_kvadrata,
+            visina=self.height // self.velikost_kvadrata,
         )
 
     def konec(self):
         return self.zemlja.konec()
 
     def input(self):
+        self.zemlja.premakni()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:
@@ -74,8 +74,7 @@ class GUI(App):
                     self.zemlja.snake.smer_premika(0, 1)
                 elif event.key == pygame.K_q:
                     sys.exit()
-        self.zemlja.premakni()
-        self.clock.tick(7)
+        self.clock.tick(10)
 
     def _messages(self, text, title, poistionX, positionY):
         # Ustvari text podlago
