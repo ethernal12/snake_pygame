@@ -18,5 +18,6 @@ python src
 
 ### Kako igrati igro:
 * Igra se začne z začetno postavitvijo kače na sredini igrišča.
-* Z tipkami A- LEVO , D-DESNO, W-GOR IN S-DOL, premikaj kačo in pojej hrano ki se pojavi na naključni poziciji. Vsako pobiranje hrane ti prinese točko. 
+* Z tipkami q- izhod, a- LEVO ,s-DESNO, w-GOR IN s-DOL premikaj kačo in pojej hrano ki se pojavi na naključni poziciji. Vsako pobiranje hrane ti prinese točko. 
 * Igre je konec če se glava kače dotakne svojega telesa ali je pozicija kače izven igrišča.
+
