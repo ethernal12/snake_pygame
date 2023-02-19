@@ -1,5 +1,5 @@
 # Snake igra - Pygame
-
+![alt text](https://github.com/ethernal12/snake_pygame/blob/master/snake_screen.jpg)
 ### Konfiguracije igre:
 
 
