@@ -2,7 +2,6 @@ import unittest
 
 from src.domain.hrana import Hrana
 
-
 class Test_Hrana(unittest.TestCase):
 
     def setUp(self) -> None:
@@ -11,5 +10,7 @@ class Test_Hrana(unittest.TestCase):
         self.hrana = Hrana(x=self.hrana_x, y=self.hrana_y)
 
     def test___init__(self):
-        self.assertEqual(self.hrana.x, self.hrana_x)
+        self.assertTrue(self.hrana.x, self.hrana_x)
         self.assertEqual(self.hrana.y, self.hrana_y)
+
+

@@ -1,12 +1,7 @@
 from dataclasses import dataclass
 
-from autologging import traced
-import random
-
 
 @dataclass
-@traced
-class Hrana:
+class DelKace:
     x: int
     y: int
-
